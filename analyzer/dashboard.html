@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>kslat live</title>
+<style>
+:root {
+  color-scheme: light;
+  --bg: #f4f3ef; --surface: #fcfcfb; --border: #e4e3df; --grid: #ebeae6;
+  --ink: #0b0b0b; --ink2: #52514e; --ink3: #8a8983;
+  --s1: #2a78d6; --s2: #eb6834; --muted: #b8b7b1;
+  --good: #1f8a4c; --bad: #c8322f;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #111110; --surface: #1a1a19; --border: #2c2c2a; --grid: #262624;
+    --ink: #ffffff; --ink2: #c3c2b7; --ink3: #8f8e86;
+    --s1: #3987e5; --s2: #d95926; --muted: #5b5a55;
+    --good: #3fb56f; --bad: #e66767;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #111110; --surface: #1a1a19; --border: #2c2c2a; --grid: #262624;
+  --ink: #ffffff; --ink2: #c3c2b7; --ink3: #8f8e86;
+  --s1: #3987e5; --s2: #d95926; --muted: #5b5a55;
+  --good: #3fb56f; --bad: #e66767;
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink);
+  font: 14px/1.45 ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
+.mono, td.num, .tile .v { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-variant-numeric: tabular-nums; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 20px 16px 40px; }
+header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px 16px; margin-bottom: 16px; }
+h1 { font-size: 20px; margin: 0; font-weight: 650; letter-spacing: -0.01em; }
+.sub { color: var(--ink2); font-size: 13px; }
+.badge { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 600;
+  padding: 2px 9px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface); }
+.dot { width: 8px; height: 8px; border-radius: 50%; background: var(--muted); }
+.live .dot { background: var(--good); animation: pulse 1.6s infinite; }
+.down .dot { background: var(--bad); }
+@keyframes pulse { 50% { opacity: .35; } }
+.grid { display: grid; gap: 12px; }
+.tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 12px; }
+@media (max-width: 720px) { .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.tile, .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; }
+.tile { padding: 12px 14px; }
+.tile .k { color: var(--ink2); font-size: 12px; }
+.tile .v { font-size: 20px; font-weight: 600; margin-top: 2px; white-space: nowrap; }
+.tile .s { color: var(--ink3); font-size: 12px; margin-top: 2px; }
+.card { padding: 14px 16px; min-width: 0; }
+.card h2 { font-size: 14px; margin: 0 0 2px; font-weight: 650; }
+.card .hint { color: var(--ink3); font-size: 12px; margin: 0 0 10px; }
+.two { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); margin-bottom: 12px; }
+@media (max-width: 860px) { .two { grid-template-columns: minmax(0, 1fr); } }
+.legend { display: flex; gap: 14px; font-size: 12px; color: var(--ink2); margin-bottom: 4px; flex-wrap: wrap; }
+.legend i { display: inline-block; width: 14px; height: 2px; vertical-align: middle; margin-right: 6px; border-radius: 2px; }
+.chart { position: relative; }
+.chart svg { display: block; width: 100%; height: 240px; }
+.tip { position: absolute; pointer-events: none; background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; padding: 6px 9px; font-size: 12px; box-shadow: 0 4px 14px rgba(0,0,0,.12);
+  display: none; white-space: nowrap; z-index: 2; }
+.bars { display: flex; flex-direction: column; gap: 7px; }
+.bar { display: grid; grid-template-columns: minmax(0, 1fr) 72px; gap: 8px; align-items: center; font-size: 12.5px; }
+.bar .lbl { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar .track { grid-column: 1 / 2; height: 8px; background: var(--grid); border-radius: 4px; overflow: hidden; }
+.bar .fill { height: 100%; background: var(--s1); border-radius: 0 4px 4px 0; }
+.bar .fill.un { background: var(--muted); }
+.bar .val { grid-row: 1 / 3; grid-column: 2; text-align: right; color: var(--ink2); font-family: ui-monospace, Menlo, monospace; }
+.scroll { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+th { text-align: left; color: var(--ink3); font-weight: 500; padding: 4px 8px; border-bottom: 1px solid var(--border); white-space: nowrap; }
+td { padding: 5px 8px; border-bottom: 1px solid var(--grid); vertical-align: top; }
+td.num, th.num { text-align: right; white-space: nowrap; }
+.chip { display: inline-block; padding: 0 6px; margin: 1px 4px 1px 0; border-radius: 4px; background: var(--grid); color: var(--ink2); white-space: nowrap; }
+.chip b { color: var(--ink); font-weight: 600; }
+.empty { color: var(--ink3); font-size: 13px; padding: 12px 0; }
+.err { color: var(--bad); font-size: 12px; margin-top: 6px; }
+footer { color: var(--ink3); font-size: 12px; margin-top: 16px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>kslat <span id="sym" class="sub"></span></h1>
+    <span id="badge" class="badge"><span class="dot"></span><span id="badgeText">connecting</span></span>
+    <span id="hdr" class="sub"></span>
+  </header>
+
+  <div class="grid tiles" id="tiles"></div>
+
+  <div class="grid two">
+    <div class="card">
+      <h2>Latency per refresh</h2>
+      <p class="hint">p99 of each refresh interval, µs, log scale. Service = hot thread work only; tick-to-book includes queueing.</p>
+      <div class="legend"><span><i style="background:var(--s1)"></i>service p99</span><span><i style="background:var(--s2)"></i>tick-to-book p99</span></div>
+      <div class="chart" id="chart"><svg id="svg"></svg><div class="tip" id="tip"></div></div>
+    </div>
+    <div class="card">
+      <h2>Where the tail went</h2>
+      <p class="hint" id="tailHint">Excess time inside the slowest 1% of updates in the window.</p>
+      <div class="bars" id="causes"></div>
+    </div>
+  </div>
+
+  <div class="grid two">
+    <div class="card">
+      <h2>Slowest updates in window</h2>
+      <p class="hint">Each row: one book update and the kernel events that overlapped it.</p>
+      <div class="scroll"><table id="slow"></table></div>
+    </div>
+    <div class="card">
+      <h2>Every kernel interruption of the hot thread</h2>
+      <p class="hint">Since start. Counts and total time stolen, by cause.</p>
+      <div class="scroll"><table id="ints"></table></div>
+    </div>
+  </div>
+  <div id="err" class="err"></div>
+  <footer id="foot"></footer>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+function us(ns) {
+  if (ns == null) return "–";
+  if (ns < 1000) return ns.toFixed(0) + " ns";
+  if (ns < 1e6) return (ns / 1e3).toFixed(ns < 1e4 ? 2 : 1) + " µs";
+  if (ns < 1e9) return (ns / 1e6).toFixed(2) + " ms";
+  return (ns / 1e9).toFixed(2) + " s";
+}
+function px(v, dp) { return v == null ? "–" : Number(v).toLocaleString(undefined, {minimumFractionDigits: dp, maximumFractionDigits: dp}); }
+function dpFor(tick) { return tick >= 1 ? 0 : Math.min(8, Math.ceil(-Math.log10(tick))); }
+
+function tile(k, v, s) { return `<div class="tile"><div class="k">${k}</div><div class="v">${v}</div><div class="s">${s || "&nbsp;"}</div></div>`; }
+
+function render(st) {
+  if (!st.ready) { $("badgeText").textContent = "waiting for engine"; return; }
+  const s = st.status || {}, m = st.meta || {};
+  const live = s.live !== false && s.updates != null;
+  $("badge").className = "badge " + (live ? "live" : "down");
+  $("badgeText").textContent = live ? "live" : (s.last_error ? "reconnecting" : "waiting");
+  $("sym").textContent = [m.mode, m.symbol].filter(Boolean).join(" · ");
+  $("hdr").textContent = `pid ${m.pid} · hot thread ${m.tid} on CPU ${m.cpu} · up ${s.uptime_s ?? "–"} s`;
+
+  const dp = dpFor(s.tick || (m.mode === "bitstamp" ? 1 : 0.01));
+  const spread = (s.best_bid != null && s.best_ask != null) ? s.best_ask - s.best_bid : null;
+  const sv = st.service_ns || {}, e2 = st.e2e_ns || {}, w = st.wire_ns, t = st.tail || {};
+  const steal = st.history.length ? st.history.slice(-30).reduce((a, p) => a + (p.steal_ns || 0), 0) : 0;
+  $("tiles").innerHTML = [
+    tile("Best bid / ask", `${px(s.best_bid, dp)}`, `ask ${px(s.best_ask, dp)} · spread ${spread == null ? "–" : px(spread, dp)}`),
+    tile("Microprice", px(s.microprice, dp + 1), `${px(s.live_orders, 0)} resting ${m.mode === "binance" ? "levels" : "orders"}`),
+    tile("Updates / s", px(st.rate_window, 0), `${px(st.updates_total, 0)} total`),
+    tile("Service p50 / p99", us(sv.p50), `p99 ${us(sv.p99)} · max ${us(sv.max)}`),
+    tile("Tick-to-book p99", us(e2.p99), `p50 ${us(e2.p50)} · max ${us(e2.max)}`),
+    tile("Exchange → us", w ? us(w.p50) : "–", w ? `p99 ${us(w.p99)} (clock skew incl.)` : "no exchange timestamps"),
+    tile("Tail explained by kernel", t.excess_ns ? Math.round(t.attributed_frac * 100) + "%" : "–",
+         t.n ? `${t.with_kernel_event}/${t.n} slow updates hit` : ""),
+    tile("Feed health", `${s.reconnects ?? 0} / ${s.gaps ?? 0}`, `reconnects / gaps · crossed ${s.crossed ?? 0} · steal ${us(steal)}`),
+  ].join("");
+
+  drawChart(st.history);
+  drawCauses(t);
+  drawSlow(st.slowest || []);
+  drawInts(st.interruptions_total || []);
+  $("err").textContent = (st.error ? "analyzer: " + st.error : "") + (s.last_error ? "  feed: " + s.last_error : "");
+  $("foot").textContent = `rolling window ${st.window_s}s · ${px(st.n_window, 0)} updates in window · fault cost est. ${us(st.fault_cost_ns)} · refreshed ${new Date().toLocaleTimeString()}`;
+}
+
+function drawCauses(t) {
+  const el = $("causes");
+  if (!t || !t.excess_ns) { el.innerHTML = `<div class="empty">Not enough data yet.</div>`; return; }
+  $("tailHint").textContent = `Excess time inside the ${t.n} updates slower than ${us(t.threshold_ns)} (window p99).`;
+  const rows = (t.causes || []).map(c => [c.label, c.ns, false]);
+  rows.push(["unexplained (user-space / hypervisor)", Math.max(0, t.excess_ns - t.attributed_ns), true]);
+  const max = Math.max(...rows.map(r => r[1]), 1);
+  el.innerHTML = rows.map(([l, v, un]) => `<div class="bar" title="${esc(l)}: ${us(v)} (${(v / t.excess_ns * 100).toFixed(1)}%)">
+      <div class="lbl">${esc(l)}</div><div class="val">${us(v)}</div>
+      <div class="track"><div class="fill ${un ? "un" : ""}" style="width:${(v / max * 100).toFixed(1)}%"></div></div></div>`).join("");
+}
+
+function drawSlow(rows) {
+  if (!rows.length) { $("slow").innerHTML = `<tr><td class="empty">Not enough data yet.</td></tr>`; return; }
+  $("slow").innerHTML = `<tr><th>ago</th><th>op</th><th class="num">service</th><th class="num">tick-to-book</th><th>kernel causes</th></tr>` +
+    rows.map(r => {
+      const chips = Object.entries(r.causes).map(([k, v]) => `<span class="chip">${esc(k)} <b>${us(v)}</b></span>`).join("");
+      const un = r.unexplained_ns > 500 ? `<span class="chip">unexplained <b>${us(r.unexplained_ns)}</b></span>` : "";
+      return `<tr><td class="num">${r.ago_s}s</td><td>${esc(r.op)}</td><td class="num">${us(r.service_ns)}</td><td class="num">${us(r.e2e_ns)}</td><td>${chips || ""}${un || (chips ? "" : "<span class='sub'>none</span>")}</td></tr>`;
+    }).join("");
+}
+
+function drawInts(rows) {
+  if (!rows.length) { $("ints").innerHTML = `<tr><td class="empty">No kernel events yet.</td></tr>`; return; }
+  $("ints").innerHTML = `<tr><th>cause</th><th class="num">count</th><th class="num">total</th><th class="num">avg</th></tr>` +
+    rows.map(r => `<tr><td>${esc(r.label)}</td><td class="num">${px(r.count, 0)}</td><td class="num">${us(r.total_ns)}</td><td class="num">${us(r.count ? r.total_ns / r.count : 0)}</td></tr>`).join("");
+}
+
+let lastHist = [];
+function drawChart(hist) {
+  lastHist = hist = hist.filter(p => p.svc_p99 != null);
+  const svg = $("svg"), W = svg.clientWidth || 700, H = 240, L = 50, R = 12, T = 10, B = 26;
+  const axisLbl = v => v >= 1e9 ? (v / 1e9) + " s" : v >= 1e6 ? (v / 1e6) + " ms" : v >= 1e3 ? (v / 1e3) + " µs" : v + " ns";
+  svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+  if (hist.length < 2) { svg.innerHTML = `<text x="${L}" y="${H / 2}" fill="var(--ink3)" font-size="13">collecting…</text>`; return; }
+  const vals = hist.flatMap(p => [p.svc_p99, p.e2e_p99]).filter(v => v > 0);
+  let lo = Math.log10(Math.max(10, Math.min(...vals))), hi = Math.log10(Math.max(...vals));
+  lo = Math.floor(lo); hi = Math.max(lo + 1, Math.ceil(hi));
+  const t0 = hist[0].t, t1 = hist[hist.length - 1].t;
+  const x = t => L + (W - L - R) * (t - t0) / Math.max(t1 - t0, 1e-9);
+  const y = v => T + (H - T - B) * (1 - (Math.log10(Math.max(v, 10)) - lo) / (hi - lo));
+  let g = "";
+  for (let d = lo; d <= hi; d++) {
+    const yy = y(10 ** d);
+    g += `<line x1="${L}" x2="${W - R}" y1="${yy}" y2="${yy}" stroke="var(--grid)"/>`;
+    g += `<text x="${L - 8}" y="${yy + 4}" text-anchor="end" font-size="11" fill="var(--ink3)">${axisLbl(10 ** d)}</text>`;
+  }
+  const nt = 5;
+  for (let i = 0; i <= nt; i++) {
+    const tt = t0 + (t1 - t0) * i / nt;
+    g += `<text x="${x(tt)}" y="${H - 6}" text-anchor="middle" font-size="11" fill="var(--ink3)">${Math.round(tt)}s</text>`;
+  }
+  const path = k => hist.map((p, i) => `${i ? "L" : "M"}${x(p.t).toFixed(1)},${y(p[k]).toFixed(1)}`).join("");
+  g += `<path d="${path("e2e_p99")}" fill="none" stroke="var(--s2)" stroke-width="2" stroke-linejoin="round"/>`;
+  g += `<path d="${path("svc_p99")}" fill="none" stroke="var(--s1)" stroke-width="2" stroke-linejoin="round"/>`;
+  g += `<line id="xh" y1="${T}" y2="${H - B}" stroke="var(--ink3)" stroke-dasharray="3 3" visibility="hidden"/>`;
+  g += `<circle id="d1" r="4" fill="var(--s1)" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>`;
+  g += `<circle id="d2" r="4" fill="var(--s2)" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>`;
+  g += `<rect x="${L}" y="${T}" width="${W - L - R}" height="${H - T - B}" fill="transparent" id="hit"/>`;
+  svg.innerHTML = g;
+  const tip = $("tip"), hit = $("hit");
+  hit.onmousemove = ev => {
+    const r = svg.getBoundingClientRect(), mx = (ev.clientX - r.left) * W / r.width;
+    let best = 0;
+    for (let i = 1; i < lastHist.length; i++) if (Math.abs(x(lastHist[i].t) - mx) < Math.abs(x(lastHist[best].t) - mx)) best = i;
+    const p = lastHist[best], xx = x(p.t);
+    for (const [id, k] of [["d1", "svc_p99"], ["d2", "e2e_p99"]]) { const c = $(id); c.setAttribute("cx", xx); c.setAttribute("cy", y(p[k])); c.setAttribute("visibility", "visible"); }
+    const xh = $("xh"); xh.setAttribute("x1", xx); xh.setAttribute("x2", xx); xh.setAttribute("visibility", "visible");
+    tip.style.display = "block";
+    tip.innerHTML = `<b>t = ${p.t}s</b><br>service p99 ${us(p.svc_p99)}<br>tick-to-book p99 ${us(p.e2e_p99)}<br>${px(p.rate, 0)} updates/s · kernel ${us(p.kernel_ns)}${p.steal_ns ? " · steal " + us(p.steal_ns) : ""}`;
+    const left = xx * r.width / W;
+    tip.style.left = Math.min(left + 12, r.width - tip.offsetWidth - 4) + "px";
+    tip.style.top = "8px";
+  };
+  hit.onmouseleave = () => { tip.style.display = "none"; for (const id of ["d1", "d2", "xh"]) $(id).setAttribute("visibility", "hidden"); };
+}
+
+async function poll() {
+  try {
+    const r = await fetch("/api/state", {cache: "no-store"});
+    render(await r.json());
+  } catch (e) {
+    $("badge").className = "badge down"; $("badgeText").textContent = "dashboard offline";
+  }
+  setTimeout(poll, 2000);
+}
+window.addEventListener("resize", () => drawChart(lastHist));
+poll();
+</script>
+</body>
+</html>
