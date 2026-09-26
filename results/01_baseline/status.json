@@ -1,0 +1,6 @@
+{"t": 2112605925695, "uptime_s": 3.5, "feed": "synthetic", "symbol": "", "live": true,
+ "updates": 1751811, "best_bid": 328.060000, "best_ask": 328.070000, "bid_qty": 362, "ask_qty": 4000,
+ "microprice": 328.060830, "live_orders": 54847, "rejected": 474923, "span_drops": 0, "crossed": 0,
+ "frames": 0, "feed_ops": 0, "out_of_range": 0, "queue_full": 0,
+ "reconnects": 0, "gaps": 0, "snapshots": 0, "last_wire_us": 0.0,
+ "last_error": ""}

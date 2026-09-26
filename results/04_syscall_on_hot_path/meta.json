@@ -1,0 +1,5 @@
+{"span_version": 2, "mode": "synthetic", "symbol": "", "tick": 0.01, "lot": 1,
+ "pid": 3094, "tid": 3094, "cpu": 1, "aux_cpu": 0, "n": 2000000, "rate": 500000,
+ "prefault": true, "fault_every": 0, "syscall_every": 2000, "tlb_noise": false,
+ "t_start": 2128151359994, "t_end": 2132152139008,
+ "trades": 988435, "adds": 1261336, "cancels": 188707, "modifies": 0, "rejected": 549957}

@@ -1,0 +1,10 @@
+kslat: tracing pid 3042 -> results/02_no_prefault/events.bin
+kslat: done, dropped=0
+  offcpu      22
+  hardirq     32
+  softirq     184
+  vector      1020
+  fault       756
+  tlb         22
+  syscall     22
+  migrate     4

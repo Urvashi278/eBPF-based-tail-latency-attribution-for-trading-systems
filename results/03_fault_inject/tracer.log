@@ -1,0 +1,10 @@
+kslat: tracing pid 3069 -> results/03_fault_inject/events.bin
+kslat: done, dropped=0
+  offcpu      11
+  hardirq     40
+  softirq     202
+  vector      1007
+  fault       2002
+  tlb         11
+  syscall     22
+  migrate     4

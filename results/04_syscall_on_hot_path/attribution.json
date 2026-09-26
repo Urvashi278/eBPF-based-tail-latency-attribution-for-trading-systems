@@ -1,0 +1,571 @@
+{
+  "run": "04_syscall_on_hot_path",
+  "meta": {
+    "span_version": 2,
+    "mode": "synthetic",
+    "symbol": "",
+    "tick": 0.01,
+    "lot": 1,
+    "pid": 3094,
+    "tid": 3094,
+    "cpu": 1,
+    "aux_cpu": 0,
+    "n": 2000000,
+    "rate": 500000,
+    "prefault": true,
+    "fault_every": 0,
+    "syscall_every": 2000,
+    "tlb_noise": false,
+    "t_start": 2128151359994,
+    "t_end": 2132152139008,
+    "trades": 988435,
+    "adds": 1261336,
+    "cancels": 188707,
+    "modifies": 0,
+    "rejected": 549957
+  },
+  "latency_ns": {
+    "p50": 80,
+    "p90": 418,
+    "p99": 848,
+    "p99.9": 2606,
+    "p99.99": 15806,
+    "max": 2364161,
+    "mean": 179.617341
+  },
+  "tick_to_book_ns": {
+    "p50": 160,
+    "p90": 604,
+    "p99": 79963,
+    "p99.9": 2043015,
+    "p99.99": 4021787,
+    "max": 4362054
+  },
+  "baseline_ns_by_type": {
+    "add": 52,
+    "cancel": 196,
+    "aggress": 134
+  },
+  "fault_cost_ns_estimate": null,
+  "fault_cost_samples": 0,
+  "event_counts": {
+    "offcpu": 15,
+    "hardirq": 34,
+    "softirq": 191,
+    "vector": 1009,
+    "fault": 1,
+    "tlb": 6,
+    "syscall": 1014
+  },
+  "tail_threshold": "p99.9",
+  "tail": {
+    "spans": 2000,
+    "spans_with_kernel_event": 738,
+    "excess_ns": 23992696,
+    "attributed_ns": 3176416,
+    "attributed_frac": 0.1323909576481109,
+    "causes_ns": {
+      "syscall write": 1467442,
+      "timer tick": 775790,
+      "preempted by kworker/1:0": 578079,
+      "softirq TIMER": 192578,
+      "softirq BLOCK": 100573,
+      "softirq SCHED": 21322,
+      "hardirq virtio1-req.0": 16266,
+      "softirq RCU": 13293,
+      "softirq NET_RX": 8934,
+      "hardirq virtio7-output.0": 2139
+    }
+  },
+  "buckets": {
+    "p99-p99.9": {
+      "spans": 17948,
+      "spans_with_kernel_event": 322,
+      "excess_ns": 16136404,
+      "attributed_ns": 303733,
+      "attributed_frac": 0.018822843057226382,
+      "causes_ns": {
+        "syscall write": 303733
+      }
+    },
+    "p99.9-p99.99": {
+      "spans": 1800,
+      "spans_with_kernel_event": 677,
+      "excess_ns": 13139406,
+      "attributed_ns": 1447859,
+      "attributed_frac": 0.1101921197959786,
+      "causes_ns": {
+        "syscall write": 1447859
+      }
+    },
+    ">p99.99": {
+      "spans": 200,
+      "spans_with_kernel_event": 61,
+      "excess_ns": 10853290,
+      "attributed_ns": 1728557,
+      "attributed_frac": 0.15926571574149406,
+      "causes_ns": {
+        "timer tick": 775790,
+        "preempted by kworker/1:0": 578079,
+        "softirq TIMER": 192578,
+        "softirq BLOCK": 100573,
+        "softirq SCHED": 21322,
+        "syscall write": 19583,
+        "hardirq virtio1-req.0": 16266,
+        "softirq RCU": 13293,
+        "softirq NET_RX": 8934,
+        "hardirq virtio7-output.0": 2139
+      }
+    }
+  },
+  "slowest": [
+    {
+      "seq": 208267,
+      "type": "aggress",
+      "latency_ns": 2364161,
+      "excess_ns": 2364027,
+      "causes_ns": {
+        "timer tick": 34538
+      },
+      "unexplained_ns": 2329489,
+      "t_offset_ms": 416.534053
+    },
+    {
+      "seq": 1998762,
+      "type": "add",
+      "latency_ns": 1129584,
+      "excess_ns": 1129532,
+      "causes_ns": {},
+      "unexplained_ns": 1129532,
+      "t_offset_ms": 3999.242656
+    },
+    {
+      "seq": 34333,
+      "type": "add",
+      "latency_ns": 740885,
+      "excess_ns": 740833,
+      "causes_ns": {},
+      "unexplained_ns": 740833,
+      "t_offset_ms": 68.671441
+    },
+    {
+      "seq": 980320,
+      "type": "aggress",
+      "latency_ns": 598985,
+      "excess_ns": 598851,
+      "causes_ns": {
+        "preempted by kworker/1:0": 564342,
+        "softirq TIMER": 8949,
+        "timer tick": 8340
+      },
+      "unexplained_ns": 17220,
+      "t_offset_ms": 1960.640054
+    },
+    {
+      "seq": 1186523,
+      "type": "cancel",
+      "latency_ns": 200939,
+      "excess_ns": 200743,
+      "causes_ns": {},
+      "unexplained_ns": 200743,
+      "t_offset_ms": 2373.046077
+    },
+    {
+      "seq": 1975313,
+      "type": "cancel",
+      "latency_ns": 134773,
+      "excess_ns": 134577,
+      "causes_ns": {},
+      "unexplained_ns": 134577,
+      "t_offset_ms": 3950.626056
+    },
+    {
+      "seq": 1454390,
+      "type": "cancel",
+      "latency_ns": 123733,
+      "excess_ns": 123537,
+      "causes_ns": {},
+      "unexplained_ns": 123537,
+      "t_offset_ms": 2908.780077
+    },
+    {
+      "seq": 199397,
+      "type": "cancel",
+      "latency_ns": 109852,
+      "excess_ns": 109656,
+      "causes_ns": {},
+      "unexplained_ns": 109656,
+      "t_offset_ms": 398.814722
+    },
+    {
+      "seq": 1268940,
+      "type": "add",
+      "latency_ns": 104757,
+      "excess_ns": 104705,
+      "causes_ns": {
+        "softirq BLOCK": 78158,
+        "hardirq virtio1-req.0": 10671
+      },
+      "unexplained_ns": 15876,
+      "t_offset_ms": 2537.880054
+    },
+    {
+      "seq": 1983039,
+      "type": "aggress",
+      "latency_ns": 102820,
+      "excess_ns": 102686,
+      "causes_ns": {},
+      "unexplained_ns": 102686,
+      "t_offset_ms": 3966.07806
+    },
+    {
+      "seq": 1861890,
+      "type": "cancel",
+      "latency_ns": 102021,
+      "excess_ns": 101825,
+      "causes_ns": {},
+      "unexplained_ns": 101825,
+      "t_offset_ms": 3723.780062
+    },
+    {
+      "seq": 3,
+      "type": "aggress",
+      "latency_ns": 99433,
+      "excess_ns": 99299,
+      "causes_ns": {},
+      "unexplained_ns": 99299,
+      "t_offset_ms": 0.2871
+    },
+    {
+      "seq": 1,
+      "type": "cancel",
+      "latency_ns": 93735,
+      "excess_ns": 93539,
+      "causes_ns": {},
+      "unexplained_ns": 93539,
+      "t_offset_ms": 0.192602
+    },
+    {
+      "seq": 1706492,
+      "type": "add",
+      "latency_ns": 93339,
+      "excess_ns": 93287,
+      "causes_ns": {},
+      "unexplained_ns": 93287,
+      "t_offset_ms": 3412.984037
+    },
+    {
+      "seq": 961490,
+      "type": "cancel",
+      "latency_ns": 90138,
+      "excess_ns": 89942,
+      "causes_ns": {},
+      "unexplained_ns": 89942,
+      "t_offset_ms": 1922.980055
+    },
+    {
+      "seq": 1988321,
+      "type": "cancel",
+      "latency_ns": 76187,
+      "excess_ns": 75991,
+      "causes_ns": {
+        "timer tick": 18541,
+        "preempted by kworker/1:0": 13737,
+        "softirq TIMER": 11626
+      },
+      "unexplained_ns": 32087,
+      "t_offset_ms": 3976.644352
+    },
+    {
+      "seq": 1483109,
+      "type": "cancel",
+      "latency_ns": 73510,
+      "excess_ns": 73314,
+      "causes_ns": {},
+      "unexplained_ns": 73314,
+      "t_offset_ms": 2966.218046
+    },
+    {
+      "seq": 932320,
+      "type": "cancel",
+      "latency_ns": 73144,
+      "excess_ns": 72948,
+      "causes_ns": {
+        "softirq TIMER": 49781,
+        "timer tick": 10699
+      },
+      "unexplained_ns": 12468,
+      "t_offset_ms": 1864.640043
+    },
+    {
+      "seq": 1284320,
+      "type": "cancel",
+      "latency_ns": 72439,
+      "excess_ns": 72243,
+      "causes_ns": {
+        "softirq TIMER": 52017,
+        "timer tick": 9195
+      },
+      "unexplained_ns": 11031,
+      "t_offset_ms": 2568.640044
+    },
+    {
+      "seq": 1437890,
+      "type": "add",
+      "latency_ns": 71925,
+      "excess_ns": 71873,
+      "causes_ns": {},
+      "unexplained_ns": 71873,
+      "t_offset_ms": 2875.780036
+    },
+    {
+      "seq": 1509890,
+      "type": "cancel",
+      "latency_ns": 69447,
+      "excess_ns": 69251,
+      "causes_ns": {},
+      "unexplained_ns": 69251,
+      "t_offset_ms": 3019.78006
+    },
+    {
+      "seq": 1444320,
+      "type": "add",
+      "latency_ns": 68912,
+      "excess_ns": 68860,
+      "causes_ns": {
+        "softirq TIMER": 46557,
+        "timer tick": 10791
+      },
+      "unexplained_ns": 11512,
+      "t_offset_ms": 2888.640043
+    },
+    {
+      "seq": 199448,
+      "type": "add",
+      "latency_ns": 68681,
+      "excess_ns": 68629,
+      "causes_ns": {},
+      "unexplained_ns": 68629,
+      "t_offset_ms": 398.947819
+    },
+    {
+      "seq": 1761390,
+      "type": "aggress",
+      "latency_ns": 67355,
+      "excess_ns": 67221,
+      "causes_ns": {},
+      "unexplained_ns": 67221,
+      "t_offset_ms": 3522.780038
+    },
+    {
+      "seq": 155796,
+      "type": "cancel",
+      "latency_ns": 64769,
+      "excess_ns": 64573,
+      "causes_ns": {},
+      "unexplained_ns": 64573,
+      "t_offset_ms": 311.592074
+    }
+  ],
+  "validation": {
+    "injected syscall": {
+      "injected_spans": 1000,
+      "detected": 1000,
+      "recall": 1.0,
+      "precision": 1.0
+    }
+  },
+  "cause_stats": {
+    "timer tick": {
+      "count": 1004,
+      "total_ns": 13095809,
+      "p50_ns": 10603,
+      "p99_ns": 30993,
+      "max_ns": 384095
+    },
+    "syscall write": {
+      "count": 1001,
+      "total_ns": 1787795,
+      "p50_ns": 1329,
+      "p99_ns": 5077,
+      "max_ns": 19583
+    },
+    "preempted by kworker/1:0": {
+      "count": 9,
+      "total_ns": 1657469,
+      "p50_ns": 23728,
+      "p99_ns": 563440,
+      "max_ns": 564342
+    },
+    "softirq TIMER": {
+      "count": 78,
+      "total_ns": 1450061,
+      "p50_ns": 2119,
+      "p99_ns": 68985,
+      "max_ns": 80913
+    },
+    "preempted by mi-scavenger": {
+      "count": 4,
+      "total_ns": 640895,
+      "p50_ns": 59553,
+      "p99_ns": 502444,
+      "max_ns": 514936
+    },
+    "softirq SCHED": {
+      "count": 41,
+      "total_ns": 285733,
+      "p50_ns": 6703,
+      "p99_ns": 9124,
+      "max_ns": 9164
+    },
+    "softirq RCU": {
+      "count": 38,
+      "total_ns": 270338,
+      "p50_ns": 1878,
+      "p99_ns": 30481,
+      "max_ns": 30490
+    },
+    "softirq BLOCK": {
+      "count": 8,
+      "total_ns": 240521,
+      "p50_ns": 22689,
+      "p99_ns": 74687,
+      "max_ns": 78158
+    },
+    "softirq NET_RX": {
+      "count": 26,
+      "total_ns": 159565,
+      "p50_ns": 5489,
+      "p99_ns": 9779,
+      "max_ns": 9987
+    },
+    "hardirq virtio7-output.0": {
+      "count": 26,
+      "total_ns": 55720,
+      "p50_ns": 2147,
+      "p99_ns": 2679,
+      "max_ns": 2687
+    },
+    "hardirq virtio1-req.0": {
+      "count": 8,
+      "total_ns": 52465,
+      "p50_ns": 6003,
+      "p99_ns": 10380,
+      "max_ns": 10671
+    },
+    "syscall openat": {
+      "count": 1,
+      "total_ns": 44436,
+      "p50_ns": 44436,
+      "p99_ns": 44436,
+      "max_ns": 44436
+    },
+    "syscall sched_setaffinity": {
+      "count": 1,
+      "total_ns": 28393,
+      "p50_ns": 28393,
+      "p99_ns": 28393,
+      "max_ns": 28393
+    },
+    "syscall clone3": {
+      "count": 1,
+      "total_ns": 21433,
+      "p50_ns": 21433,
+      "p99_ns": 21433,
+      "max_ns": 21433
+    },
+    "syscall rename": {
+      "count": 1,
+      "total_ns": 11920,
+      "p50_ns": 11920,
+      "p99_ns": 11920,
+      "max_ns": 11920
+    },
+    "preempted by migration/1": {
+      "count": 1,
+      "total_ns": 9067,
+      "p50_ns": 9067,
+      "p99_ns": 9067,
+      "max_ns": 9067
+    },
+    "preempted by kcompactd0": {
+      "count": 1,
+      "total_ns": 8930,
+      "p50_ns": 8930,
+      "p99_ns": 8930,
+      "max_ns": 8930
+    },
+    "syscall mprotect": {
+      "count": 1,
+      "total_ns": 8290,
+      "p50_ns": 8290,
+      "p99_ns": 8290,
+      "max_ns": 8290
+    },
+    "syscall close": {
+      "count": 1,
+      "total_ns": 7095,
+      "p50_ns": 7095,
+      "p99_ns": 7095,
+      "max_ns": 7095
+    },
+    "syscall mmap": {
+      "count": 1,
+      "total_ns": 5382,
+      "p50_ns": 5382,
+      "p99_ns": 5382,
+      "max_ns": 5382
+    },
+    "IPI/call_function_single": {
+      "count": 2,
+      "total_ns": 4878,
+      "p50_ns": 2439,
+      "p99_ns": 2638,
+      "max_ns": 2643
+    },
+    "IPI/reschedule": {
+      "count": 3,
+      "total_ns": 2253,
+      "p50_ns": 981,
+      "p99_ns": 1055,
+      "max_ns": 1057
+    },
+    "syscall rt_sigprocmask": {
+      "count": 3,
+      "total_ns": 1126,
+      "p50_ns": 348,
+      "p99_ns": 475,
+      "max_ns": 478
+    },
+    "syscall getpid": {
+      "count": 1,
+      "total_ns": 833,
+      "p50_ns": 833,
+      "p99_ns": 833,
+      "max_ns": 833
+    },
+    "syscall fstat": {
+      "count": 1,
+      "total_ns": 568,
+      "p50_ns": 568,
+      "p99_ns": 568,
+      "max_ns": 568
+    },
+    "syscall rt_sigaction": {
+      "count": 1,
+      "total_ns": 480,
+      "p50_ns": 480,
+      "p99_ns": 480,
+      "max_ns": 480
+    },
+    "page fault": {
+      "count": 1,
+      "total_ns": 0,
+      "p50_ns": 0,
+      "p99_ns": 0,
+      "max_ns": 0
+    }
+  },
+  "steal_ns_engine_cpu": 30000000,
+  "run_ns": 4000779014
+}

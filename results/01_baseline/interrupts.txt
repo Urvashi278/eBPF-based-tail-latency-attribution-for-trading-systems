@@ -1,0 +1,43 @@
+           CPU0       CPU1       
+ 24:          1          0  IO-APIC   5-edge      ACPI:Ged
+ 25:          0          1  IO-APIC   6-edge      ACPI:Ged
+ 26:          3          0  IO-APIC   4-edge      ttyS0
+ 29:          0          0 PCI-MSIX-0000:00:01.0   0-edge      virtio0-config
+ 30:          0          0 PCI-MSIX-0000:00:01.0   1-edge      virtio0-inflate
+ 31:          0          0 PCI-MSIX-0000:00:01.0   2-edge      virtio0-deflate
+ 32:          0        421 PCI-MSIX-0000:00:01.0   3-edge      virtio0-stats
+ 33:        159          0 PCI-MSIX-0000:00:01.0   4-edge      virtio0-reporting_vq
+ 34:          0          0 PCI-MSIX-0000:00:0a.0   0-edge      virtio9-config
+ 35:         46          0 PCI-MSIX-0000:00:0a.0   1-edge      virtio9-input
+ 36:          0          1 PCI-MSIX-0000:00:02.0   0-edge      virtio1-config
+ 37:          0      13102 PCI-MSIX-0000:00:02.0   1-edge      virtio1-req.0
+ 38:          1          0 PCI-MSIX-0000:00:03.0   0-edge      virtio2-config
+ 39:         70          0 PCI-MSIX-0000:00:03.0   1-edge      virtio2-req.0
+ 40:          0          1 PCI-MSIX-0000:00:04.0   0-edge      virtio3-config
+ 41:          0       1696 PCI-MSIX-0000:00:04.0   1-edge      virtio3-req.0
+ 42:          1          0 PCI-MSIX-0000:00:05.0   0-edge      virtio4-config
+ 43:        399          0 PCI-MSIX-0000:00:05.0   1-edge      virtio4-req.0
+ 44:          0          1 PCI-MSIX-0000:00:06.0   0-edge      virtio5-config
+ 45:          0          9 PCI-MSIX-0000:00:06.0   1-edge      virtio5-req.0
+ 46:          1          0 PCI-MSIX-0000:00:07.0   0-edge      virtio6-config
+ 47:          9          0 PCI-MSIX-0000:00:07.0   1-edge      virtio6-req.0
+ 48:          0          0 PCI-MSIX-0000:00:08.0   0-edge      virtio7-config
+ 49:      36236          0 PCI-MSIX-0000:00:08.0   1-edge      virtio7-input.0
+ 50:          0      36194 PCI-MSIX-0000:00:08.0   2-edge      virtio7-output.0
+ 51:          0          0 PCI-MSIX-0000:00:09.0   0-edge      virtio8-config
+ 52:          0        170 PCI-MSIX-0000:00:09.0   1-edge      virtio8-rx
+ 53:        328          0 PCI-MSIX-0000:00:09.0   2-edge      virtio8-tx
+ 54:          0          1 PCI-MSIX-0000:00:09.0   3-edge      virtio8-event
+NMI:          0          0   Non-maskable interrupts
+LOC:     522596     258789   Local timer interrupts
+SPU:          0          0   Spurious interrupts
+PMI:          0          0   Performance monitoring interrupts
+IWI:     175652      34828   IRQ work interrupts
+RTR:          0          0   APIC ICR read retries
+RES:       5988       7557   Rescheduling interrupts
+CAL:     100570     109746   Function call interrupts
+TLB:       4503      31687   TLB shootdowns
+TRM:          0          0   Thermal event interrupts
+HYP:          2          2   Hypervisor callback interrupts
+ERR:          0
+MIS:          0

@@ -1,0 +1,10 @@
+kslat: tracing pid 3119 -> results/05_tlb_shootdown/events.bin
+kslat: done, dropped=0
+  offcpu      39
+  hardirq     36
+  softirq     1115
+  vector      11844
+  fault       3
+  tlb         10844
+  syscall     29
+  migrate     9

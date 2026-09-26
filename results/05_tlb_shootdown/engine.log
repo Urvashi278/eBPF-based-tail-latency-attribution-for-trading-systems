@@ -1,0 +1,3 @@
+generating 2000000 msgs...
+ready pid=3119 tid=3119, waiting for SIGUSR1
+done: 2000000 updates in 4.000s, trades=988435 rejected=549957 span_drops=0

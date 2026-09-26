@@ -1,0 +1,586 @@
+{
+  "run": "02_no_prefault",
+  "meta": {
+    "span_version": 2,
+    "mode": "synthetic",
+    "symbol": "",
+    "tick": 0.01,
+    "lot": 1,
+    "pid": 3042,
+    "tid": 3042,
+    "cpu": 1,
+    "aux_cpu": 0,
+    "n": 2000000,
+    "rate": 500000,
+    "prefault": false,
+    "fault_every": 0,
+    "syscall_every": 0,
+    "tlb_noise": false,
+    "t_start": 2115499701136,
+    "t_end": 2119499699801,
+    "trades": 988435,
+    "adds": 1261336,
+    "cancels": 188707,
+    "modifies": 0,
+    "rejected": 549957
+  },
+  "latency_ns": {
+    "p50": 81,
+    "p90": 414,
+    "p99": 874,
+    "p99.9": 2440,
+    "p99.99": 23768,
+    "max": 5723943,
+    "mean": 186.3544725
+  },
+  "tick_to_book_ns": {
+    "p50": 167,
+    "p90": 633,
+    "p99": 424578,
+    "p99.9": 3225869,
+    "p99.99": 5368296,
+    "max": 5724011
+  },
+  "baseline_ns_by_type": {
+    "add": 53,
+    "cancel": 195,
+    "aggress": 138
+  },
+  "fault_cost_ns_estimate": 3368,
+  "fault_cost_samples": 752,
+  "event_counts": {
+    "offcpu": 21,
+    "hardirq": 31,
+    "softirq": 182,
+    "vector": 1018,
+    "fault": 755,
+    "tlb": 15,
+    "syscall": 14
+  },
+  "tail_threshold": "p99.9",
+  "tail": {
+    "spans": 2000,
+    "spans_with_kernel_event": 826,
+    "excess_ns": 35785404,
+    "attributed_ns": 4420192,
+    "attributed_frac": 0.12351941031600482,
+    "causes_ns": {
+      "page fault": 2037071,
+      "timer tick": 1999956,
+      "softirq TIMER": 212289,
+      "softirq SCHED": 46600,
+      "softirq NET_RX": 40993,
+      "softirq RCU": 33037,
+      "preempted by mi-scavenger": 24020,
+      "hardirq virtio7-output.0": 13702,
+      "preempted by kworker/1:0": 9869,
+      "IPI/reschedule": 2655
+    }
+  },
+  "buckets": {
+    "p99-p99.9": {
+      "spans": 17972,
+      "spans_with_kernel_event": 83,
+      "excess_ns": 16268357,
+      "attributed_ns": 174056,
+      "attributed_frac": 0.010699052153822294,
+      "causes_ns": {
+        "page fault": 174056
+      }
+    },
+    "p99.9-p99.99": {
+      "spans": 1800,
+      "spans_with_kernel_event": 724,
+      "excess_ns": 14661208,
+      "attributed_ns": 2596682,
+      "attributed_frac": 0.17711241802176192,
+      "causes_ns": {
+        "page fault": 2006759,
+        "timer tick": 559530,
+        "softirq NET_RX": 14340,
+        "hardirq virtio7-output.0": 5753,
+        "preempted by mi-scavenger": 5284,
+        "softirq RCU": 2780,
+        "IPI/reschedule": 1291,
+        "softirq TIMER": 945
+      }
+    },
+    ">p99.99": {
+      "spans": 200,
+      "spans_with_kernel_event": 102,
+      "excess_ns": 21124196,
+      "attributed_ns": 1823510,
+      "attributed_frac": 0.08632328539273164,
+      "causes_ns": {
+        "timer tick": 1440426,
+        "softirq TIMER": 211344,
+        "softirq SCHED": 46600,
+        "page fault": 30312,
+        "softirq RCU": 30257,
+        "softirq NET_RX": 26653,
+        "preempted by mi-scavenger": 18736,
+        "preempted by kworker/1:0": 9869,
+        "hardirq virtio7-output.0": 7949,
+        "IPI/reschedule": 1364
+      }
+    }
+  },
+  "slowest": [
+    {
+      "seq": 643123,
+      "type": "add",
+      "latency_ns": 5723943,
+      "excess_ns": 5723890,
+      "causes_ns": {
+        "timer tick": 12294,
+        "page fault": 3368
+      },
+      "unexplained_ns": 5708228,
+      "t_offset_ms": 1286.246068
+    },
+    {
+      "seq": 641279,
+      "type": "add",
+      "latency_ns": 2223442,
+      "excess_ns": 2223389,
+      "causes_ns": {
+        "timer tick": 10416,
+        "softirq SCHED": 5566,
+        "page fault": 3368
+      },
+      "unexplained_ns": 2204039,
+      "t_offset_ms": 1282.558044
+    },
+    {
+      "seq": 38639,
+      "type": "cancel",
+      "latency_ns": 1943614,
+      "excess_ns": 1943419,
+      "causes_ns": {
+        "timer tick": 16696
+      },
+      "unexplained_ns": 1926723,
+      "t_offset_ms": 78.561492
+    },
+    {
+      "seq": 1328218,
+      "type": "add",
+      "latency_ns": 1407617,
+      "excess_ns": 1407564,
+      "causes_ns": {},
+      "unexplained_ns": 1407564,
+      "t_offset_ms": 2656.436038
+    },
+    {
+      "seq": 1847820,
+      "type": "cancel",
+      "latency_ns": 785006,
+      "excess_ns": 784811,
+      "causes_ns": {
+        "timer tick": 17328
+      },
+      "unexplained_ns": 767483,
+      "t_offset_ms": 3695.746946
+    },
+    {
+      "seq": 861061,
+      "type": "add",
+      "latency_ns": 352647,
+      "excess_ns": 352594,
+      "causes_ns": {},
+      "unexplained_ns": 352594,
+      "t_offset_ms": 1722.306678
+    },
+    {
+      "seq": 27697,
+      "type": "add",
+      "latency_ns": 302675,
+      "excess_ns": 302622,
+      "causes_ns": {},
+      "unexplained_ns": 302622,
+      "t_offset_ms": 55.394057
+    },
+    {
+      "seq": 891288,
+      "type": "cancel",
+      "latency_ns": 257461,
+      "excess_ns": 257266,
+      "causes_ns": {},
+      "unexplained_ns": 257266,
+      "t_offset_ms": 1782.589445
+    },
+    {
+      "seq": 59232,
+      "type": "add",
+      "latency_ns": 245018,
+      "excess_ns": 244965,
+      "causes_ns": {},
+      "unexplained_ns": 244965,
+      "t_offset_ms": 118.668506
+    },
+    {
+      "seq": 59215,
+      "type": "add",
+      "latency_ns": 232425,
+      "excess_ns": 232372,
+      "causes_ns": {},
+      "unexplained_ns": 232372,
+      "t_offset_ms": 118.430048
+    },
+    {
+      "seq": 1329237,
+      "type": "cancel",
+      "latency_ns": 166894,
+      "excess_ns": 166699,
+      "causes_ns": {},
+      "unexplained_ns": 166699,
+      "t_offset_ms": 2658.474046
+    },
+    {
+      "seq": 890925,
+      "type": "aggress",
+      "latency_ns": 163525,
+      "excess_ns": 163387,
+      "causes_ns": {},
+      "unexplained_ns": 163387,
+      "t_offset_ms": 1782.201328
+    },
+    {
+      "seq": 59091,
+      "type": "cancel",
+      "latency_ns": 162740,
+      "excess_ns": 162545,
+      "causes_ns": {},
+      "unexplained_ns": 162545,
+      "t_offset_ms": 118.182049
+    },
+    {
+      "seq": 1879686,
+      "type": "add",
+      "latency_ns": 135051,
+      "excess_ns": 134998,
+      "causes_ns": {},
+      "unexplained_ns": 134998,
+      "t_offset_ms": 3759.372069
+    },
+    {
+      "seq": 1882150,
+      "type": "aggress",
+      "latency_ns": 129431,
+      "excess_ns": 129293,
+      "causes_ns": {
+        "softirq TIMER": 86689,
+        "timer tick": 17722
+      },
+      "unexplained_ns": 24882,
+      "t_offset_ms": 3764.300128
+    },
+    {
+      "seq": 3,
+      "type": "aggress",
+      "latency_ns": 127637,
+      "excess_ns": 127499,
+      "causes_ns": {
+        "timer tick": 13932,
+        "softirq SCHED": 2415,
+        "softirq RCU": 1253
+      },
+      "unexplained_ns": 109899,
+      "t_offset_ms": 0.247654
+    },
+    {
+      "seq": 1884218,
+      "type": "cancel",
+      "latency_ns": 126830,
+      "excess_ns": 126635,
+      "causes_ns": {},
+      "unexplained_ns": 126635,
+      "t_offset_ms": 3768.436077
+    },
+    {
+      "seq": 119490,
+      "type": "cancel",
+      "latency_ns": 96647,
+      "excess_ns": 96452,
+      "causes_ns": {},
+      "unexplained_ns": 96452,
+      "t_offset_ms": 238.98006
+    },
+    {
+      "seq": 1,
+      "type": "cancel",
+      "latency_ns": 93452,
+      "excess_ns": 93257,
+      "causes_ns": {},
+      "unexplained_ns": 93257,
+      "t_offset_ms": 0.153322
+    },
+    {
+      "seq": 890978,
+      "type": "cancel",
+      "latency_ns": 92243,
+      "excess_ns": 92048,
+      "causes_ns": {},
+      "unexplained_ns": 92048,
+      "t_offset_ms": 1782.384492
+    },
+    {
+      "seq": 1640206,
+      "type": "add",
+      "latency_ns": 84948,
+      "excess_ns": 84895,
+      "causes_ns": {},
+      "unexplained_ns": 84895,
+      "t_offset_ms": 3280.412072
+    },
+    {
+      "seq": 1124002,
+      "type": "cancel",
+      "latency_ns": 83076,
+      "excess_ns": 82881,
+      "causes_ns": {},
+      "unexplained_ns": 82881,
+      "t_offset_ms": 2248.004079
+    },
+    {
+      "seq": 1466150,
+      "type": "add",
+      "latency_ns": 78017,
+      "excess_ns": 77964,
+      "causes_ns": {
+        "softirq TIMER": 51415,
+        "timer tick": 13428
+      },
+      "unexplained_ns": 13121,
+      "t_offset_ms": 2932.300073
+    },
+    {
+      "seq": 1857750,
+      "type": "cancel",
+      "latency_ns": 72628,
+      "excess_ns": 72433,
+      "causes_ns": {},
+      "unexplained_ns": 72433,
+      "t_offset_ms": 3715.500058
+    },
+    {
+      "seq": 446151,
+      "type": "aggress",
+      "latency_ns": 70429,
+      "excess_ns": 70291,
+      "causes_ns": {
+        "timer tick": 33447
+      },
+      "unexplained_ns": 36844,
+      "t_offset_ms": 892.302077
+    }
+  ],
+  "validation": {},
+  "cause_stats": {
+    "timer tick": {
+      "count": 1004,
+      "total_ns": 13231672,
+      "p50_ns": 11737,
+      "p99_ns": 29587,
+      "max_ns": 36654
+    },
+    "preempted by mi-scavenger": {
+      "count": 12,
+      "total_ns": 1580171,
+      "p50_ns": 57824,
+      "p99_ns": 484926,
+      "max_ns": 503507
+    },
+    "softirq TIMER": {
+      "count": 76,
+      "total_ns": 1450278,
+      "p50_ns": 1833,
+      "p99_ns": 76187,
+      "max_ns": 86689
+    },
+    "softirq RCU": {
+      "count": 35,
+      "total_ns": 221286,
+      "p50_ns": 1336,
+      "p99_ns": 24509,
+      "max_ns": 26305
+    },
+    "softirq SCHED": {
+      "count": 41,
+      "total_ns": 194643,
+      "p50_ns": 4753,
+      "p99_ns": 7990,
+      "max_ns": 9056
+    },
+    "softirq BLOCK": {
+      "count": 7,
+      "total_ns": 151918,
+      "p50_ns": 22191,
+      "p99_ns": 23697,
+      "max_ns": 23766
+    },
+    "softirq NET_RX": {
+      "count": 23,
+      "total_ns": 143956,
+      "p50_ns": 5687,
+      "p99_ns": 10984,
+      "max_ns": 11117
+    },
+    "preempted by kworker/1:0": {
+      "count": 6,
+      "total_ns": 109985,
+      "p50_ns": 11789,
+      "p99_ns": 49611,
+      "max_ns": 51407
+    },
+    "hardirq virtio7-output.0": {
+      "count": 23,
+      "total_ns": 42887,
+      "p50_ns": 1905,
+      "p99_ns": 2399,
+      "max_ns": 2402
+    },
+    "syscall openat": {
+      "count": 1,
+      "total_ns": 37265,
+      "p50_ns": 37265,
+      "p99_ns": 37265,
+      "max_ns": 37265
+    },
+    "hardirq virtio1-req.0": {
+      "count": 7,
+      "total_ns": 37003,
+      "p50_ns": 5493,
+      "p99_ns": 5874,
+      "max_ns": 5885
+    },
+    "preempted by Bun Pool 0": {
+      "count": 1,
+      "total_ns": 32090,
+      "p50_ns": 32090,
+      "p99_ns": 32090,
+      "max_ns": 32090
+    },
+    "syscall sched_setaffinity": {
+      "count": 1,
+      "total_ns": 24990,
+      "p50_ns": 24990,
+      "p99_ns": 24990,
+      "max_ns": 24990
+    },
+    "syscall clone3": {
+      "count": 1,
+      "total_ns": 22431,
+      "p50_ns": 22431,
+      "p99_ns": 22431,
+      "max_ns": 22431
+    },
+    "IPI/reschedule": {
+      "count": 12,
+      "total_ns": 13999,
+      "p50_ns": 1324,
+      "p99_ns": 1815,
+      "max_ns": 1858
+    },
+    "preempted by kworker/u8:8": {
+      "count": 1,
+      "total_ns": 12808,
+      "p50_ns": 12808,
+      "p99_ns": 12808,
+      "max_ns": 12808
+    },
+    "hardirq virtio0-stats": {
+      "count": 1,
+      "total_ns": 11169,
+      "p50_ns": 11169,
+      "p99_ns": 11169,
+      "max_ns": 11169
+    },
+    "syscall rename": {
+      "count": 1,
+      "total_ns": 10685,
+      "p50_ns": 10685,
+      "p99_ns": 10685,
+      "max_ns": 10685
+    },
+    "syscall write": {
+      "count": 1,
+      "total_ns": 7762,
+      "p50_ns": 7762,
+      "p99_ns": 7762,
+      "max_ns": 7762
+    },
+    "preempted by migration/1": {
+      "count": 1,
+      "total_ns": 7759,
+      "p50_ns": 7759,
+      "p99_ns": 7759,
+      "max_ns": 7759
+    },
+    "IPI/call_function_single": {
+      "count": 2,
+      "total_ns": 5371,
+      "p50_ns": 2685,
+      "p99_ns": 2792,
+      "max_ns": 2795
+    },
+    "syscall mmap": {
+      "count": 1,
+      "total_ns": 4416,
+      "p50_ns": 4416,
+      "p99_ns": 4416,
+      "max_ns": 4416
+    },
+    "syscall mprotect": {
+      "count": 1,
+      "total_ns": 3703,
+      "p50_ns": 3703,
+      "p99_ns": 3703,
+      "max_ns": 3703
+    },
+    "syscall rt_sigprocmask": {
+      "count": 3,
+      "total_ns": 1222,
+      "p50_ns": 321,
+      "p99_ns": 627,
+      "max_ns": 634
+    },
+    "syscall close": {
+      "count": 1,
+      "total_ns": 726,
+      "p50_ns": 726,
+      "p99_ns": 726,
+      "max_ns": 726
+    },
+    "syscall fstat": {
+      "count": 1,
+      "total_ns": 647,
+      "p50_ns": 647,
+      "p99_ns": 647,
+      "max_ns": 647
+    },
+    "syscall rt_sigaction": {
+      "count": 1,
+      "total_ns": 506,
+      "p50_ns": 506,
+      "p99_ns": 506,
+      "max_ns": 506
+    },
+    "syscall getpid": {
+      "count": 1,
+      "total_ns": 397,
+      "p50_ns": 397,
+      "p99_ns": 397,
+      "max_ns": 397
+    },
+    "page fault": {
+      "count": 755,
+      "total_ns": 2542840,
+      "p50_ns": 3368,
+      "p99_ns": 0,
+      "max_ns": 0
+    }
+  },
+  "steal_ns_engine_cpu": 50000000,
+  "run_ns": 3999998665
+}

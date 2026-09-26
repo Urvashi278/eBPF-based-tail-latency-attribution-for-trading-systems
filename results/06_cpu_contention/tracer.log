@@ -1,0 +1,10 @@
+kslat: tracing pid 3153 -> results/06_cpu_contention/events.bin
+kslat: done, dropped=0
+  offcpu      498
+  hardirq     16
+  softirq     93
+  vector      504
+  fault       2
+  tlb         503
+  syscall     22
+  migrate     1

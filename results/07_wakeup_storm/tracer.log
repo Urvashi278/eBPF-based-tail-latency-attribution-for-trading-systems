@@ -1,0 +1,10 @@
+kslat: tracing pid 3180 -> results/07_wakeup_storm/events.bin
+kslat: done, dropped=0
+  offcpu      14592
+  hardirq     31
+  softirq     195
+  vector      15124
+  fault       2
+  tlb         14558
+  syscall     22
+  migrate     5

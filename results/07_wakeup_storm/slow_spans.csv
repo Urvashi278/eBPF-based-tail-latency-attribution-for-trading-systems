@@ -1,0 +1,26 @@
+seq,type,latency_ns,excess_ns,unexplained_ns,causes
+299872,add,2663938,2663880,2611874,preempted by python3=33376; timer tick=18630
+1372110,aggress,2467295,2467145,2422009,preempted by python3=28466; timer tick=16670
+1130857,add,1898930,1898872,1831577,preempted by python3=37021; timer tick=30274
+1372170,aggress,1566842,1566692,1528294,preempted by python3=21603; timer tick=16795
+322348,cancel,1419178,1418976,1378057,preempted by python3=23251; timer tick=17668
+1386913,add,852818,852760,819174,preempted by python3=21201; timer tick=12385
+78691,cancel,363493,363291,324426,preempted by python3=29714; timer tick=9151
+1634617,add,361452,361394,309269,preempted by python3=34548; timer tick=17577
+1127357,cancel,283874,283672,261692,preempted by python3=12738; timer tick=9242
+215406,add,276470,276412,257663,preempted by python3=10591; timer tick=8158
+1261371,cancel,146259,146057,126645,preempted by python3=11392; timer tick=8020
+325446,cancel,136725,136523,113339,preempted by python3=13174; timer tick=10010
+1637777,cancel,128879,128677,19972,preempted by python3=101532; timer tick=7173
+574826,cancel,121893,121691,42132,preempted by python3=60755; timer tick=18804
+1774996,cancel,119846,119644,119644,
+1183332,add,116674,116616,64755,preempted by python3=33147; timer tick=18714
+1550826,aggress,115221,115071,93149,preempted by python3=12542; timer tick=9380
+1500904,add,109821,109763,15049,preempted by python3=84914; timer tick=9800
+1,cancel,96609,96407,96407,
+3,aggress,96226,96076,96076,
+440356,cancel,87342,87140,46766,preempted by python3=23396; timer tick=16978
+325445,add,87247,87189,87189,
+1447838,aggress,86649,86499,86499,
+325357,aggress,86224,86074,86074,
+1157357,cancel,84626,84424,54171,preempted by python3=17218; timer tick=13035

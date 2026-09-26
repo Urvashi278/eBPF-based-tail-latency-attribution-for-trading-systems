@@ -1,0 +1,10 @@
+kslat: tracing pid 3094 -> results/04_syscall_on_hot_path/events.bin
+kslat: done, dropped=0
+  offcpu      16
+  hardirq     35
+  softirq     195
+  vector      1012
+  fault       2
+  tlb         15
+  syscall     1022
+  migrate     6

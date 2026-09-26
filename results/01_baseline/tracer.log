@@ -1,0 +1,10 @@
+kslat: tracing pid 3010 -> results/01_baseline/events.bin
+kslat: done, dropped=0
+  offcpu      14
+  hardirq     35
+  softirq     196
+  vector      1008
+  fault       2
+  tlb         13
+  syscall     22
+  migrate     8
