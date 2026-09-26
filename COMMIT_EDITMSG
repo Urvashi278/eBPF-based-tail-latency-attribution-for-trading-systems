@@ -1,0 +1,14 @@
+Live mode: Bitstamp L3 / Binance L2 feeds + live dashboard
+
+- minimal OpenSSL ws/wss/https client; Bitstamp and Binance adapters with
+  snapshot+stream sync, sequence-gap resync, reconnect, tick/lot auto-detect
+- feed -> hot -> writer threads over SPSC rings; spans carry t_rx so
+  tick-to-book latency (incl. queueing) is measured
+- order book: 64-bit ids via open-addressing map, L3 mirror ops, crossed-book check
+- kslat_live.py + dashboard.html: rolling-window attribution served on :8080
+- mock exchange speaking both protocols for offline development
+- aux threads pinned before first run; own-thread preemption labelled
+- tracer records preemptor tid and flushes for live tailing
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01Nnv65NVBpQ8iFquAfRdxbN
